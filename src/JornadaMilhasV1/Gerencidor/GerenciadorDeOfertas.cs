@@ -65,7 +65,6 @@ public class GerenciadorDeOfertas
 
     }
 
-
     public void CarregarOfertas()
     {
         AdicionarOfertaNaLista(new OfertaViagem(new Rota("São Paulo", "Curitiba"), new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20)), 500));
@@ -81,4 +80,11 @@ public class GerenciadorDeOfertas
             Console.WriteLine(oferta);
         }
     }
+
+    public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool>
+        filtro) => ofertaViagem
+        .Where(filtro)
+        .Where(o => o.Ativa)
+        .OrderBy(o => o.Preco)
+        .FirstOrDefault();
 }
